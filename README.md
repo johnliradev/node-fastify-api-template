@@ -73,7 +73,7 @@ The project uses Fastify's logger for debugging:
 
 ## Deploy
 
-### Docker (Recommended)
+### Docker (Recommended if you not have node 22 version)
 
 ```dockerfile
 FROM node:22-alpine
