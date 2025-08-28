@@ -1,11 +1,24 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 
 export const Router = (app: FastifyInstance) => {
-  app.get("/ping", (request: FastifyRequest, reply: FastifyReply) => {
-    reply.send({ res: "pong" });
-  });
-  app.get("/test-error", (request: FastifyRequest, reply: FastifyReply) => {
-    const { createAppError } = require("../errors/appError");
-    throw createAppError("Unauthorized", 401);
-  });
+  app.get(
+    "/health",
+    {
+      schema: {
+        description: "Health check endpoint",
+        tags: ["Health"],
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              status: { type: "string" },
+              timestamp: { type: "string", format: "date-time" },
+            },
+          },
+        },
+      },
+    },
+    (request: FastifyRequest, reply: FastifyReply) =>
+      reply.send({ status: "ok", timestamp: new Date().toISOString() })
+  );
 };

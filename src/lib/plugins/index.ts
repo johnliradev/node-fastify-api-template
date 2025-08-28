@@ -4,12 +4,12 @@ import swaggerUi from "@fastify/swagger-ui";
 import { FastifyInstance } from "fastify";
 import { Router } from "@/http/routes/index";
 
-export const registerPlugins = (app: FastifyInstance) => {
+export const registerPlugins = async (app: FastifyInstance) => {
   app.register(cors, { origin: "*" });
   app.register(swagger, {
     swagger: {
       info: {
-        title: "API Documentation",
+        title: "Open Mat",
         description: "API documentation",
         version: "1.0.0",
       },
@@ -20,7 +20,7 @@ export const registerPlugins = (app: FastifyInstance) => {
     },
   });
   app.register(swaggerUi, {
-    routePrefix: "/api/docs",
+    routePrefix: "/api/swagger",
     uiConfig: {
       deepLinking: false,
     },

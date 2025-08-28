@@ -2,10 +2,14 @@ import "dotenv/config";
 import z, { treeifyError } from "zod";
 
 const _env = z.object({
+  NODE_ENV: z
+    .enum(["development", "production", "test"])
+    .default("development"),
   PORT: z
     .string()
     .min(1, ".env is invalid: PORT not defined")
     .transform(Number),
+  HOST: z.string().default("0.0.0.0"),
 });
 
 function validateEnv() {
